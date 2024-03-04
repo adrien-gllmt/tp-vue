@@ -1,0 +1,11 @@
+html, body {
+    background: #322d4b;
+}
+
+header, .bg-info {
+    background: #322d4b;
+}
+
+.bg-info a {
+    color: yellow;
+}
