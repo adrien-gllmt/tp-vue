@@ -30,7 +30,7 @@ const fetchAllCategories = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/categories`,
+        `http://149.91.80.19/symfony/public/api/categories`,
         {
           method: "GET",
           headers: {
@@ -57,7 +57,7 @@ const fetchAllActors = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/actors`,
+        `http://149.91.80.19/symfony/public/api/actors`,
         {
           method: "GET",
           headers: {
@@ -87,7 +87,7 @@ const addMovie = async () => {
       //const actorIds = newMovie.value.actors.map(actor => `/api/actors/${actor.id}`);
       //const CategoryId = `/api/categories/${newMovie.value.category.id}`;
 
-      const response = await fetch('http://localhost:8000/api/actors', {
+      const response = await fetch('http://149.91.80.19/symfony/public/api/actors', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/ld+json',
@@ -126,7 +126,7 @@ const AuthenticationRequest = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/actors`,
+        `http://149.91.80.19/symfony/public/api/actors`,
         {
           method: "GET",
           headers: {
@@ -164,7 +164,7 @@ const search = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/actors?firstName=${searchInput.value}`,
+        `http://149.91.80.19/symfony/public/api/actors?firstName=${searchInput.value}`,
         {
           method: "GET",
           headers: {
@@ -254,21 +254,7 @@ const updatePagination = () => {
         <ActorCard :movie="movie" :movies="movies" />
       </div>
     </div>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" @click="changePage(-1)" :disabled="currentPage === 1" aria-label="Précédent">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link">{{ currentPage }} / {{ totalPages }}</a></li>
-        <li class="page-item">
-          <a class="page-link" @click="changePage(1)" :disabled="currentPage === totalPages" aria-label="Suivant">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+
     <div v-if="showSuccessModal" class="modal" id="successModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

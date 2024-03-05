@@ -17,7 +17,7 @@ const updateMovie = async () => {
   const token = localStorage.getItem('token');
   if (token && selectedMovie.value) {
     try {
-      const response = await fetch(`http://localhost:8000/api/categories/${selectedMovieId.value}`, {
+      const response = await fetch(`http://149.91.80.19/symfony/public/api/categories/${selectedMovieId.value}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/ld+json',
@@ -56,7 +56,7 @@ const openDeleteModal = (id) => {
     try {
       const token = localStorage.getItem('token');
       if (token && selectedMovieId.value) {
-        const response = await fetch(`http://localhost:8000/api/categories/${selectedMovieId.value}`, {
+        const response = await fetch(`http://149.91.80.19/symfony/public/api/categories/${selectedMovieId.value}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,

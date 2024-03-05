@@ -5,7 +5,7 @@ import Logout from '@/components/Logout.vue';
 <template>
   <nav class="navbar navbar-expand-lg navbar-light px-5 bg-info">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/"><a class="navbar-brand fw-bold text-white">Movie-Hub</a></router-link>
+      <router-link class="navbar-brand" to="/"><a class="navbar-brand fw-bold text-white">MovieApp</a></router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -19,7 +19,7 @@ const updateMovie = async () => {
 
   if (token && selectedMovie.value) {
     try {
-      const response = await fetch(`http://localhost:8000/api/movies/${selectedMovieId.value}`, {
+      const response = await fetch(`http://149.91.80.19/symfony/public/api/movies/${selectedMovieId.value}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/ld+json',
@@ -53,7 +53,7 @@ const openDeleteModal = (id) => {
     try {
       const token = localStorage.getItem('token');
       if (token && selectedMovieId.value) {
-        const response = await fetch(`http://localhost:8000/api/movies/${selectedMovieId.value}`, {
+        const response = await fetch(`http://149.91.80.19/symfony/public/api/movies/${selectedMovieId.value}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,20 +90,20 @@ const truncateText = (text, maxLength) => {
 </script>
 
 <template>
-  <div>
-    <div class="card w-100 mb-4">
+  <div class="card-wrapper">
+    <div class="card mb-4">
       <div class="card-body">
         <h4 class="card-title">{{ movie.title }}</h4>
         <p class="card-text">{{ truncateText(movie.description, 150) }}</p>
-        <p class="card-text fst-italic"><strong>Durée:</strong> {{ movie.duration + "min" }}</p>
-        <router-link :to="{ name: 'MovieDetail', params: { id: movie && movie.id }}" class="btn btn-primary">En savoir plus</router-link>
-        <button v-if="route.path === '/movies'" type="button" class="btn btn-secondary ms-2" @click="toggleDetails(movie.id)">Modifier</button>
-        <button v-if="route.path === '/movies'" type="button" class="btn btn-danger ms-2" @click="openDeleteModal(movie.id)">Supprimer</button>
+        <p class="card-text"><strong>Durée:</strong> {{ movie.duration + "min" }}</p>
+        <router-link :to="{ name: 'MovieDetail', params: { id: movie && movie.id }}" class="btn">Voir la fiche</router-link>
+        <button v-if="route.path === '/movies'" type="button" class="btn" @click="toggleDetails(movie.id)">Modifier</button>
+        <button v-if="route.path === '/movies'" type="button" class="btn delete" @click="openDeleteModal(movie.id)">Supprimer</button>
 
       </div>
     </div>
 
-    <div class="col-md-3 card p-5 border-warning bg-light my-4" v-if="selectedMovie">
+    <div class="card card-edit p-4" v-if="selectedMovie">
       <h2>{{ selectedMovie.title }}</h2>
       <form @submit.prevent="updateMovie">
         <div class="form-group mt-4">
@@ -145,8 +145,8 @@ const truncateText = (text, maxLength) => {
         </div>
 
         <div class="my-3 mt-3">
-          <button type="submit" class="btn btn-primary">Modifier</button>
-          <button type="button" class="btn btn-secondary ms-2" @click="closeForm">Fermer</button>
+          <button type="submit" class="btn">Modifier</button>
+          <button type="button" class="btn" @click="closeForm">Fermer</button>
         </div>
       </form>
     </div>
@@ -215,5 +215,27 @@ const truncateText = (text, maxLength) => {
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.btn {
+  background: yellow;
+  width: 100%;
+}
+
+.btn:hover {
+  background: #afaf00;
+  color: #322d4b;
+}
+
+.btn.delete {
+  background: red;
+}
+
+.btn.delete:hover {
+  background: #d00000;
+}
+
+.card-edit {
+  border: none;
 }
 </style>

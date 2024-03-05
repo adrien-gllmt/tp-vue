@@ -35,7 +35,7 @@ const fetchAllCategories = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/categories`,
+        `http://149.91.80.19/symfony/public/api/categories`,
         {
           method: "GET",
           headers: {
@@ -62,7 +62,7 @@ const fetchAllActors = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/actors`,
+        `http://149.91.80.19/symfony/public/api/actors`,
         {
           method: "GET",
           headers: {
@@ -104,7 +104,7 @@ const addMovie = async () => {
         website: newMovie.value.website,
       });
 
-      const response = await fetch('http://localhost:8000/api/movies', {
+      const response = await fetch('http://149.91.80.19/symfony/public/api/movies', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/ld+json',
@@ -156,7 +156,7 @@ const AuthenticationRequest = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/movies`,
+        `http://149.91.80.19/symfony/public/api/movies`,
         {
           method: "GET",
           headers: {
@@ -194,7 +194,7 @@ const search = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/movies?title=${searchInput.value}`,
+        `http://149.91.80.19/symfony/public/api/movies?title=${searchInput.value}`,
         {
           method: "GET",
           headers: {
@@ -241,21 +241,20 @@ const updatePagination = () => {
 
 <template>
   <div class="container mt-5">
-    <h1 class="text-center">Films</h1>
+    <h1 class="text-center text-white">Films</h1>
     <form class="d-flex mb-4">
       <div class="input-group">
         <input class="form-control" type="search" placeholder="Recherche" aria-label="Recherche" v-model="searchInput" @input="autoSearch" />
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFomMovie" aria-expanded="false" aria-controls="collapseExample">
+          Ajouter un film
+        </button>
       </div>
     </form>
-    <button class="btn btn-primary mt-2 mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFomMovie" aria-expanded="false" aria-controls="collapseExample">
-      Ajouter un film
-    </button>
 
     <div class="collapse mb-4" id="collapseFomMovie">
-      <div class="card card-body">
+      <div class="card">
         <form @submit.prevent="addMovie" class="mb-2 p-2">
-          <h2 class="text-center my-4">Remplir les informations du nouveau film</h2>
+          <h2 class="text-center my-4">Nouveau film</h2>
           <div class="form-group mt-2">
             <label for="title">Titre:</label>
             <input type="text" class="form-control mt-1" v-model="newMovie.title" required />
@@ -286,51 +285,25 @@ const updatePagination = () => {
           </div>
           <div class="form-group mt-2">
             <label for="budget">Budget:</label>
-            <input type="number" class="form-control mt-1" v-model="newMovie.budget" placeholder="10000€" required />
+            <input type="number" class="form-control mt-1" v-model="newMovie.budget" required />
           </div>
           <div class="form-group mt-2">
             <label for="website">Site web:</label>
             <input type="url" class="form-control mt-1" v-model="newMovie.website" required />
           </div>
-<!--          <div class="form-group mt-2 d-none">-->
-<!--            <label class="mb-1">Acteurs:</label>-->
-<!--            <div v-for="actor in allActors" :key="actor.id" class="form-check">-->
-<!--              <input type="checkbox" :id="`actor-${actor.id}`" v-model="newMovie.actors" :value="actor" class="form-check-input "  />-->
-<!--              <label :for="`actor-${actor.id}`" class="form-check-label">{{ actor.firstName }} {{ actor.lastName }}</label>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="form-group my-2 d-none">-->
-<!--            <label for="category">Catégorie:</label>-->
-<!--            <select class="form-control mt-1" v-model="newMovie.category" required>-->
-<!--              <option v-for="category in allCategories" :key="category.id" :value="category">@{{ category.name }}</option>-->
-<!--            </select>-->
-<!--          </div>-->
               <div class="form-group">
-                <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+                <button type="submit" class="btn mt-4">Ajouter</button>
               </div>
         </form>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-6" v-for="movie in movies" :key="movie.id">
         <MovieCard :movie="movie" :movies="movies" />
       </div>
     </div>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" @click="changePage(-1)" :disabled="currentPage === 1" aria-label="Précédent">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link">{{ currentPage }} / {{ totalPages }}</a></li>
-        <li class="page-item">
-          <a class="page-link" @click="changePage(1)" :disabled="currentPage === totalPages" aria-label="Suivant">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+
     <div v-if="showSuccessModal" class="modal" id="successModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -395,5 +368,24 @@ form {
   background-color: #28a745;
   color: #fff;
   border-color: #28a745;
+}
+
+.btn {
+  background: yellow;
+}
+
+.btn:hover {
+  background: #afaf00;
+  color: #322d4b;
+}
+
+#collapseFomMovie .card {
+  background: #322d4b;
+  color: white;
+  border: none;
+
+  input, textarea {
+    background: transparent;
+  }
 }
 </style>

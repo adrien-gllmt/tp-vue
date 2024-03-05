@@ -17,7 +17,7 @@ const updateMovie = async () => {
   const token = localStorage.getItem('token');
   if (token && selectedMovie.value) {
     try {
-      const response = await fetch(`http://localhost:8000/api/actors/${selectedMovieId.value}`, {
+      const response = await fetch(`http://149.91.80.19/symfony/public/api/actors/${selectedMovieId.value}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/ld+json',
@@ -56,7 +56,7 @@ const openDeleteModal = (id) => {
     try {
       const token = localStorage.getItem('token');
       if (token && selectedMovieId.value) {
-        const response = await fetch(`http://localhost:8000/api/actors/${selectedMovieId.value}`, {
+        const response = await fetch(`http://149.91.80.19/symfony/public/api/actors/${selectedMovieId.value}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,11 +89,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <div class="card w-100 mb-4">
+  <div class="card-wrapper">
+    <div class="card mb-4">
       <div class="card-body">
         <h4 class="card-title">{{ movie.firstName }} {{ movie.lastName }}</h4>
-        <router-link :to="{ name: 'actorDetail', params: { id: movie && movie.id }}" class="btn btn-primary">En savoir plus</router-link>
+        <router-link :to="{ name: 'actorDetail', params: { id: movie && movie.id }}" class="btn">Voir la fiche</router-link>
         <button v-if="route.path === '/actors'" type="button" class="btn btn-secondary ms-2" @click="toggleDetails(movie.id)">Modifier</button>
         <button v-if="route.path === '/actors'" type="button" class="btn btn-danger ms-2" @click="openDeleteModal(movie.id)">Supprimer</button>
       </div>
@@ -187,9 +187,13 @@ onMounted(() => {
   overflow: hidden;
 }
 
-.card-text {
-  font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.btn {
+  background: yellow;
+  width: 100%;
+}
+
+.btn:hover {
+  background: #afaf00;
+  color: #322d4b;
 }
 </style>
