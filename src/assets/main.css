@@ -3,7 +3,7 @@ html, body {
 }
 
 header, .bg-info {
-    background: #322d4b;
+    background: #322d4b !important;
 }
 
 .bg-info a {

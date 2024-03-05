@@ -15,20 +15,20 @@ onBeforeMount(async () => {
     await router.push("/login");
   } else {
     try {
-      let res = await fetch('http://localhost:8000/api/movies', { headers: authenticationHeaders });
+      let res = await fetch('http://149.91.80.19/symfony/public/api/movies', { headers: authenticationHeaders });
       res = await res.json();
       if (res.code === 401) {
         await router.push("/login");
       }
       movies.value = res["hydra:member"].slice(0, 4);
-      //movies.value = await authenticatedFetch('http://localhost:8000/api/movies', { headers: {"Accept": "application/json" }}, token);
+      //movies.value = await authenticatedFetch('http://149.91.80.19/symfony/public/api/movies', { headers: {"Accept": "application/json" }}, token);
       console.log(movies.value);
     } catch (e) {
       console.error(e);
     }
 
     try {
-      let res = await fetch('http://localhost:8000/api/actors', { headers: authenticationHeaders });
+      let res = await fetch('http://149.91.80.19/symfony/public/api/actors', { headers: authenticationHeaders });
       res = await res.json();
       if (res.code === 401) {
         await router.push("/login");
@@ -45,17 +45,16 @@ onBeforeMount(async () => {
 <template>
   <main>
     <div class="container my-5">
-      <h1>Home</h1>
       <div class="my-5">
         <h2>Films populaires :</h2>
-        <div class="my-2">
+        <div class="card-container">
           <MovieCard v-for="movie in movies" :movie="movie" :key="movie.id" />
         </div>
       </div>
       <hr class="border-bottom border-dark my-2 fw-bold">
       <div class="my-5">
         <h2>Acteurs en tendance :</h2>
-        <div class="row my-2">
+        <div class="card-container">
           <ActorCard v-for="actor in actors" :movie="actor" :key="actor.id" />
         </div>
       </div>
@@ -64,4 +63,17 @@ onBeforeMount(async () => {
 </template>
 
 <style scoped>
+.container {
+  color: white;
+}
+
+.card-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .card-wrapper {
+    width: 50%;
+  }
+}
 </style>

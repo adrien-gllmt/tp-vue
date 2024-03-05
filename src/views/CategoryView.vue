@@ -30,7 +30,7 @@ const fetchAllCategories = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/categories`,
+        `http://149.91.80.19/symfony/public/api/categories`,
         {
           method: "GET",
           headers: {
@@ -57,7 +57,7 @@ const fetchAllActors = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/actors`,
+        `http://149.91.80.19/symfony/public/api/actors`,
         {
           method: "GET",
           headers: {
@@ -87,7 +87,7 @@ const addMovie = async () => {
       //const actorIds = newMovie.value.actors.map(actor => `/api/actors/${actor.id}`);
       //const CategoryId = `/api/categories/${newMovie.value.category.id}`;
 
-      const response = await fetch('http://localhost:8000/api/categories', {
+      const response = await fetch('http://149.91.80.19/symfony/public/api/categories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/ld+json',
@@ -126,7 +126,7 @@ const AuthenticationRequest = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/categories`,
+        `http://149.91.80.19/symfony/public/api/categories`,
         {
           method: "GET",
           headers: {
@@ -164,7 +164,7 @@ const search = async () => {
   if (token) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/categories?name=${searchInput.value}`,
+        `http://149.91.80.19/symfony/public/api/categories?name=${searchInput.value}`,
         {
           method: "GET",
           headers: {
