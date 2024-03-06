@@ -94,12 +94,12 @@ onMounted(() => {
       <div class="card-body">
         <h4 class="card-title">{{ movie.firstName }} {{ movie.lastName }}</h4>
         <router-link :to="{ name: 'actorDetail', params: { id: movie && movie.id }}" class="btn">Voir la fiche</router-link>
-        <button v-if="route.path === '/actors'" type="button" class="btn btn-secondary ms-2" @click="toggleDetails(movie.id)">Modifier</button>
-        <button v-if="route.path === '/actors'" type="button" class="btn btn-danger ms-2" @click="openDeleteModal(movie.id)">Supprimer</button>
+        <button v-if="route.path === '/actors'" type="button" class="btn ms-2" @click="toggleDetails(movie.id)">Modifier</button>
+        <button v-if="route.path === '/actors'" type="button" class="btn delete ms-2" @click="openDeleteModal(movie.id)">Supprimer</button>
       </div>
     </div>
 
-    <div class="col-md-3 card p-5 border-warning bg-light my-4" v-if="selectedMovie">
+    <div class="card card-edit p-4" v-if="selectedMovie">
       <h2>{{ selectedMovie.title }}</h2>
       <form @submit.prevent="updateMovie">
         <div class="form-group mt-4">
@@ -195,5 +195,17 @@ onMounted(() => {
 .btn:hover {
   background: #afaf00;
   color: #322d4b;
+}
+
+.btn.delete {
+  background: red;
+}
+
+.btn.delete:hover {
+  background: #d00000;
+}
+
+.card-edit {
+  border: none;
 }
 </style>

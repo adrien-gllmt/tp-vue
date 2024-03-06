@@ -211,40 +211,26 @@ const updatePagination = () => {
 
 <template>
   <div class="container mt-5">
-    <h1 class="text-center">Films</h1>
+    <h1 class="text-center text-white">Catégories</h1>
     <form class="d-flex mb-4">
       <div class="input-group">
         <input class="form-control" type="search" placeholder="Recherche" aria-label="Recherche" v-model="searchInput" @input="autoSearch" />
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFomMovie" aria-expanded="false" aria-controls="collapseExample">
+          Ajouter une categorie
+        </button>
       </div>
     </form>
 
-    <button class="btn btn-primary mt-2 mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFomMovie" aria-expanded="false" aria-controls="collapseExample">
-      Ajouter un acteur
-    </button>
-
     <div class="collapse mb-4" id="collapseFomMovie">
-      <div class="card card-body">
+      <div class="card">
         <form @submit.prevent="addMovie" class="mb-2 p-2">
-          <h2 class="text-center my-4">Remplir les informations du nouvel acteur :</h2>
+          <h2 class="text-center my-4">Ajouter une catégorie :</h2>
           <div class="form-group mt-2">
-            <label for="title">Prénom :</label>
-            <input type="text" class="form-control mt-1" v-model="newMovie.firstName" required />
-          </div>
-          <div class="form-group mt-2">
-            <label for="description">Nom :</label>
-            <input class="form-control" rows="6" v-model="newMovie.lastName" required />
-          </div>
-          <div class="form-group mt-2">
-            <label for="release_date">Date de naissance :</label>
-            <input type="date" class="form-control mt-1" v-model="newMovie.birthday" required />
-          </div>
-          <div class="form-group mt-2">
-            <label for="director">Nationalité :</label>
-            <input type="text" class="form-control mt-1" v-model="newMovie.nationality" required />
+            <label for="title">Nom :</label>
+            <input type="text" class="form-control mt-1" v-model="newMovie.name" required />
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+            <button type="submit" class="btn mt-4">Créer</button>
           </div>
         </form>
       </div>
@@ -254,21 +240,7 @@ const updatePagination = () => {
         <CategoryCard :movie="movie" :movies="movies" />
       </div>
     </div>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" @click="changePage(-1)" :disabled="currentPage === 1" aria-label="Précédent">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link">{{ currentPage }} / {{ totalPages }}</a></li>
-        <li class="page-item">
-          <a class="page-link" @click="changePage(1)" :disabled="currentPage === totalPages" aria-label="Suivant">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+
     <div v-if="showSuccessModal" class="modal" id="successModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -314,11 +286,6 @@ form {
   margin-right: 10px;
 }
 
-.btn-outline-success {
-  background-color: #28a745;
-  color: #fff;
-}
-
 .page-item {
   display: inline-block;
   margin-right: 10px;
@@ -333,5 +300,24 @@ form {
   background-color: #28a745;
   color: #fff;
   border-color: #28a745;
+}
+
+.btn {
+  background: yellow;
+}
+
+.btn:hover {
+  background: #afaf00;
+  color: #322d4b;
+}
+
+#collapseFomMovie .card {
+  background: #322d4b;
+  color: white;
+  border: none;
+
+  input, textarea {
+    background: transparent;
+  }
 }
 </style>
