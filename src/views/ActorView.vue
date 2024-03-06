@@ -211,20 +211,18 @@ const updatePagination = () => {
 
 <template>
   <div class="container mt-5">
-    <h1 class="text-center">Films</h1>
+    <h1 class="text-center text-white">Acteurs</h1>
     <form class="d-flex mb-4">
       <div class="input-group">
         <input class="form-control" type="search" placeholder="Recherche" aria-label="Recherche" v-model="searchInput" @input="autoSearch" />
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFomMovie" aria-expanded="false" aria-controls="collapseExample">
+          Ajouter un acteur
+        </button>
       </div>
     </form>
 
-    <button class="btn btn-primary mt-2 mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFomMovie" aria-expanded="false" aria-controls="collapseExample">
-      Ajouter un acteur
-    </button>
-
     <div class="collapse mb-4" id="collapseFomMovie">
-      <div class="card card-body">
+      <div class="card">
         <form @submit.prevent="addMovie" class="mb-2 p-2">
           <h2 class="text-center my-4">Remplir les informations du nouvel acteur :</h2>
           <div class="form-group mt-2">
@@ -244,7 +242,7 @@ const updatePagination = () => {
             <input type="text" class="form-control mt-1" v-model="newMovie.nationality" required />
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+            <button type="submit" class="btn mt-4">Créer</button>
           </div>
         </form>
       </div>
@@ -300,24 +298,22 @@ form {
   margin-right: 10px;
 }
 
-.btn-outline-success {
-  background-color: #28a745;
-  color: #fff;
+.btn {
+  background: yellow;
 }
 
-.page-item {
-  display: inline-block;
-  margin-right: 10px;
+.btn:hover {
+  background: #afaf00;
+  color: #322d4b;
 }
 
-.page-link {
-  color: #28a745;
-  border-color: #28a745;
-}
+#collapseFomMovie .card {
+  background: #322d4b;
+  color: white;
+  border: none;
 
-.page-link:hover {
-  background-color: #28a745;
-  color: #fff;
-  border-color: #28a745;
+  input, textarea {
+    background: transparent;
+  }
 }
 </style>

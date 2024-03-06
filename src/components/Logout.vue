@@ -1,6 +1,8 @@
 <script setup>
 import router from '@/router/index.js'
 
+const token = localStorage.getItem('token');
+
 function logout() {
   localStorage.removeItem('token');
   console.log('Vous êtes déconnecté');
@@ -10,7 +12,7 @@ function logout() {
 
 <template>
   <div class="">
-    <button @click="logout" class="btn btn-danger">Se déconnecter</button>
+    <button v-if="token" @click="logout" class="btn text-white">Déconnexion</button>
   </div>
 </template>
 
